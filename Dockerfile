@@ -3,6 +3,7 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 RUN apt update && apt -y upgrade && apt -y install curl
+ENV OLLAMA_HOME=/app/.ollama
 RUN curl -fsSL https://ollama.com/install.sh | sh
 RUN ollama start & OLLAMA_PID=$! ; ollama pull gemma2 ; kill $OLLAMA_PID
 EXPOSE 8501
